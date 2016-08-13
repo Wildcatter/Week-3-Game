@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<script src="https://code.jquery.com/jquery-2.2.3.js" integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4=" crossorigin="anonymous"></script>
+</head>
+<body>
+	<style> 
+		#gameStuff { max-width: 100%; margin: 50px 200px 0px 200px; padding-left: 350px; border: 5px solid blue;}
+		.letter { width: 15px; height:30px; border-style: none; float: left; margin: 2px; padding: 2px; }
+		#gameDiv, #guessesDiv, #lettersDiv { float:left; width: 100%; margin-top:25px;}
+
+	</style>
+	<div class="container">
+  		<div class="jumbotron">
+    		<h1>Hangman</h1>
+   	 		<p>some stuff</p>
+  		</div>
+	</div>
+	<div id="gameStuff">
+		<div id="gameDiv">
+		</div>
+		<div id = "guessesDiv"></div>
+		<div id = "lettersDiv"></div>
+	</div>
+	
+<script>
+
+/*  1. display
+2. stored values of 90 tv shows
+3. select one at random
+4. display # chars of random chosen show
+5. get user keystroke
+6. check user keystroke against char
+7. if user != char subtract one from guesses remaining, add to letters guessed
+8. if user = char, display, move to next char
+9. if # of guesses = 0, you lose, display word
+10. if full word guessed, add 1 to wins, play music */
+ 
+
+var shows = ["Rugrats", "AllThat", "Arthur", "HeyArnold", "ReadingRainbow", "Goosebumps", "Ducktales", "PowerRangers", "BoyMeetsWorld", "FullHouse", "HomeImprovement", "RenAndStimpy", "BillNye", "FigureItOut"];
+var randomShow = shows[Math.floor(Math.random() * shows.length)];
+var upperShow = randomShow.toUpperCase();
+var chars = upperShow.split("");
+var guessesLeft = 10;
+var lettersGuessed = "";
+var d;
+var guessesArray = [];
+var userGuess;
+var testing;
+
+
+
+/*var testGuess = function () {
+	String.fromCharCode(event.keyCode).toLowerCase()
+;} */
+
+letters = upperShow.length;
+getsome = (function loopin() {
+	for (var i=0; i < chars.length; i++){
+		d = $('<btn class="letter-button letter letter-button-color">');
+		d.attr("let", chars[i])
+		d.css('border-bottom', 'solid 2px black')
+		$('#gameDiv').append(d);
+	};
+})();
+
+
+console.log(upperShow);
+
+document.onkeyup = function() {
+	userGuess = String.fromCharCode(event.keyCode).toUpperCase();
+	guessesArray.push(userGuess);
+	guessesLeft = guessesLeft - 1
+	testing = $("btn[let=" + userGuess + "]")
+	for (var i=0; i < chars.length; i++){
+		if (userGuess == chars[i]) {
+			$("btn[let=" + userGuess + "]").text(userGuess);
+			};
+	};
+
+	lettersGuessed = guessesArray;	
+	
+	$('#guessesDiv').html(guessesLeft);
+	$('#lettersDiv').html(lettersGuessed);
+
+	console.log(userGuess);
+	console.log(guessesArray);
+	console.log(testing);
+};
+
+
+
+
+
+
+
+
+
+
+/*var chars = randomShow.split("");
+var totalLetters = chars.length;
+
+for (var i=0; i < chars.length; i++) {
+	var d = $('<btn class="letter-button letter letter-button-color">');
+	d.data("letter", chars[i]);
+	d.html(chars[i]);
+	$('#gameDiv').append(d); */
+
+/*for (var i=0; i < charShow.length; i++) {
+	gameDiv.innerHTML = gameDiv.innerHTML + charShow[i];
+	gameDiv.innerHTML = gameDiv.innerHTML.replace(charShow[i], "_")
+}*/
+
+
+/*if (lettersGuessed == totalLetters) {
+	alert("You won");
+} else if (lettersGussed > totalLetters) {
+	alert("you lose");
+} */
+document.createElement("div");
+</script>
+</body>
+</html>
